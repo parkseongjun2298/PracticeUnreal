@@ -5,6 +5,7 @@
 #include"GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include"Components/CapsuleComponent.h"
+#include"MyAnimInstance.h"
 // Sets default values
 AMyCharacter::AMyCharacter()
 {
@@ -34,7 +35,9 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	AnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+	AnimInstance->OnMontageEnded.AddDynamic(this, &AMyCharacter::OnAttackMyMontageEnded);
 }
 
 // Called every frame
@@ -52,6 +55,9 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("RightLeft"), this, &AMyCharacter::RightLeft);
 	PlayerInputComponent->BindAxis(TEXT("Yaw"), this, &AMyCharacter::Yaw);
+
+	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AMyCharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Attack"), EInputEvent::IE_Pressed, this, &AMyCharacter::Attack);
 }
 
 void AMyCharacter::UpDown(float Value)
@@ -73,4 +79,19 @@ void AMyCharacter::RightLeft(float Value)
 void AMyCharacter::Yaw(float Value)
 {
 	AddControllerYawInput(Value);
+}
+
+void AMyCharacter::Attack()
+{
+	if (isAttacking)
+		return;
+
+		AnimInstance->PlayAttackMontage();
+		
+	isAttacking = true;
+}
+
+void AMyCharacter::OnAttackMyMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+	isAttacking = false;
 }

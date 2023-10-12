@@ -29,12 +29,18 @@ public:
 	void UpDown(float Value);
 	void RightLeft(float Value);
 	void Yaw(float Value);
+	void Attack();
 private:
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
+	UPROPERTY(VisibleAnywhere,Category=Pawn)
+		bool isAttacking;
+	UPROPERTY();
+	class UMyAnimInstance* AnimInstance;
 
-
+	UFUNCTION()
+		void OnAttackMyMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 };
