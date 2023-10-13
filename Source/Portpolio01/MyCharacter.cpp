@@ -63,17 +63,20 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void AMyCharacter::UpDown(float Value)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Updown %f"), Value);
-	if (Value == 0.f)
-		return;
-	AddMovementInput(GetActorForwardVector(), Value);
+	
+	UpDownValue = Value;
+	if(!isMontageCheck)
+		AddMovementInput(GetActorForwardVector(), Value);
 }
 
 void AMyCharacter::RightLeft(float Value)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("RightLeft %f"), Value);
-	if (Value == 0.f)
-		return;
-	AddMovementInput(GetActorRightVector(), Value);
+
+	LeftRightValue = Value;
+
+	if (!isMontageCheck)
+		AddMovementInput(GetActorRightVector(), Value);
 }
 
 void AMyCharacter::Yaw(float Value)
@@ -87,11 +90,16 @@ void AMyCharacter::Attack()
 		return;
 
 		AnimInstance->PlayAttackMontage();
-		
+		AnimInstance->JumpToSection(AttackCount);
+		AttackCount = (AttackCount + 1) % 4;
+
 	isAttacking = true;
+	isMontageCheck = true;
 }
 
 void AMyCharacter::OnAttackMyMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
 	isAttacking = false;
+
+	isMontageCheck = false;
 }

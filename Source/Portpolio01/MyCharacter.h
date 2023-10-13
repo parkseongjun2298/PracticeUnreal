@@ -41,6 +41,18 @@ private:
 	UPROPERTY();
 	class UMyAnimInstance* AnimInstance;
 
+	UPROPERTY(VisibleAnywhere, Category = Pawn)
+		bool isMontageCheck = false;
+
 	UFUNCTION()
 		void OnAttackMyMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
+	UPROPERTY()
+		int32 AttackCount=0;
+public:
+
+	UPROPERTY()
+		float UpDownValue = 0;
+	UPROPERTY()
+		float LeftRightValue = 0;
 };

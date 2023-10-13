@@ -21,6 +21,14 @@ public:
 	virtual void	NativeUpdateAnimation(float DeltaTime)override;
 
 	void PlayAttackMontage();
+
+	FName GetAttackMontageName(int32 SectionIndex);
+
+	void JumpToSection(int32 SectionIndex);
+
+private:
+	UFUNCTION()
+		void AnimNotify_AttackHit();
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 		float Speed;
@@ -28,4 +36,9 @@ private:
 		bool isFalling;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 	UAnimMontage* AttackMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+		float Horizontal;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+		float Vertical;
 };
