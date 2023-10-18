@@ -10,10 +10,9 @@
  * 
  */
 UCLASS()
-class PORTPOLIO01_API AMyGameModeBase : public AGameModeBase
+class TESTUNREALENGINE_API AMyGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
 	AMyGameModeBase();
-	
 };

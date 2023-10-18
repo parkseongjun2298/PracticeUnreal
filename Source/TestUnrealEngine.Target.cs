@@ -3,12 +3,12 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class Portpolio01Target : TargetRules
+public class TestUnrealEngineTarget : TargetRules
 {
-	public Portpolio01Target( TargetInfo Target) : base(Target)
+	public TestUnrealEngineTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "Portpolio01" } );
+		ExtraModuleNames.AddRange( new string[] { "TestUnrealEngine" } );
 	}
 }

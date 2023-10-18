@@ -7,7 +7,7 @@
 #include "MyCharacter.generated.h"
 
 UCLASS()
-class PORTPOLIO01_API AMyCharacter : public ACharacter
+class TESTUNREALENGINE_API AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -19,6 +19,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void PostInitializeComponents() override;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -26,33 +28,45 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void UpDown(float Value);
-	void RightLeft(float Value);
-	void Yaw(float Value);
 	void Attack();
+	void AttackCheck();
+
+	void UpDown(float Value);
+	void LeftRight(float Value);
+	void Yaw(float Value);
+
+	
+
+	UFUNCTION()
+	void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
-	UPROPERTY(VisibleAnywhere,Category=Pawn)
-		bool isAttacking;
-	UPROPERTY();
-	class UMyAnimInstance* AnimInstance;
+
+	UPROPERTY(VisibleAnywhere, Category=Pawn)
+	bool IsAttacking = false;
 
 	UPROPERTY(VisibleAnywhere, Category = Pawn)
 		bool isMontageCheck = false;
 
-	UFUNCTION()
-		void OnAttackMyMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+	UPROPERTY()
+	class UMyAnimInstance* AnimInstance;
 
 	UPROPERTY()
-		int32 AttackCount=0;
+	int32 AttackIndex = 0;
+
 public:
 
 	UPROPERTY()
-		float UpDownValue = 0;
+	float UpDownValue = 0;
+
 	UPROPERTY()
-		float LeftRightValue = 0;
+	float LeftRightValue = 0;
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* Weapon;
 };

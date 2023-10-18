@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "Portpolio01GameModeBase.generated.h"
+#include "TestUnrealEngineGameModeBase.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PORTPOLIO01_API APortpolio01GameModeBase : public AGameModeBase
+class TESTUNREALENGINE_API ATestUnrealEngineGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	

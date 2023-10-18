@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class Portpolio01 : ModuleRules
+public class TestUnrealEngine : ModuleRules
 {
-	public Portpolio01(ReadOnlyTargetRules Target) : base(Target)
+	public TestUnrealEngine(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
